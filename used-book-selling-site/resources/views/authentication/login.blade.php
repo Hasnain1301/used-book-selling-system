@@ -1,4 +1,8 @@
-<h1>Login</h1>
+@extends('layouts.base')
+
+@section('content')
+
+<h1>Login page</h1>
 
 <div>
 
@@ -28,3 +32,5 @@
         </div>
     </form>
 </div>
+
+@endsection

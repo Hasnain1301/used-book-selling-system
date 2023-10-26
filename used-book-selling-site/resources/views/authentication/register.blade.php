@@ -1,4 +1,8 @@
-<h1>Register</h1>
+@extends('layouts.base')
+
+@section('content')
+
+<h1>Register page</h1>
 
 <div>
     <form action="{{ route('register') }}" method="post">
@@ -30,3 +34,4 @@
         </div>
     </form>
 </div>
+@endsection
