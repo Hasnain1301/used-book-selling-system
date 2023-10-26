@@ -3,7 +3,10 @@
 
 
 @auth
-    <a href="">Logout</a>
+    <form action="{{ route('logout') }}" method="post">
+        @csrf
+        <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline;">Logout</button>
+    </form>
 @endauth
 
 @guest
