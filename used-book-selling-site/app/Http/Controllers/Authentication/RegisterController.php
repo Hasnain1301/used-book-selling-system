@@ -36,6 +36,6 @@ class RegisterController extends Controller
         ]);
 
         //redirect back to home page once registered
-        return redirect()->route('home');
+        return redirect()->route('home')->with('registered','Your account has been successfully registered');
     }
 }

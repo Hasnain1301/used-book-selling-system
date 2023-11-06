@@ -21,9 +21,9 @@ class LoginController extends Controller
 
         //sign user in after correct details are entered
         if(!auth()->attempt(['email' => $request->email, 'password' => $request->password,])) {
-            return back()->with('incorrect', 'Incorrect login credentials');
+            return back()->with('incorrect', 'Incorrect email or password');
         }   
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'You have been signed in');
     }
 }

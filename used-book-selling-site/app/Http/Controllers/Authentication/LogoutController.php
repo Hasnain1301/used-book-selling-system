@@ -11,6 +11,6 @@ class LogoutController extends Controller
 
         auth()->logout();
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('logout', 'You have been logged out');
     }
 }
