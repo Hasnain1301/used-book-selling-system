@@ -4,34 +4,55 @@
 
 <h1>Register page</h1>
 
-<div>
-    <form action="{{ route('register') }}" method="post">
+<div class="d-flex align-items-center justify-content-center">
+    <form action="{{ route('register') }}" method="post" class="card p-4 mt-3">
+
         @csrf
-        <div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your name" value="{{ old('name') }}">
             <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}">
+
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}">
+            <label for="email">Email address</label>
+
+            @error('email')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter password">
             <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Enter password">
+
+            @error('password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
-        <div>
-            <label for="password">Re-enter password</label>
-            <input type="password" name="password_confirmation" placeholder="Re-enter your password">
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter your password">
+            <label for="password_confirmation">Re-enter password</label>
         </div>
 
-        <div>
-            <button type="submit">
+        <div class="d-flex align-items-center justify-content-center mb-3">
+            <button type="submit" class="btn btn-primary">
                 Register account now
             </button>
         </div>
     </form>
 </div>
+
 @endsection
