@@ -4,6 +4,7 @@ use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -32,3 +33,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile');
+
+Route::get('/profile/{name}/listings/create', [ListingController::class, 'create'])->name('listings.create');
+Route::post('/profile/{name}/listings/create', [ListingController::class, 'add'])->name('listings.add');
+Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
