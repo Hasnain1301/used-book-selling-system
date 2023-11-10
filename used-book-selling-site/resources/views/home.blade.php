@@ -28,5 +28,18 @@
     @endif
 </div> 
 
+<h1>All books for sale</h1>
+
+@foreach($listings as $listing) 
+    <img src="{{ $listing->listingImage }}" alt="image" width="250" height="300"> <br>
+    {{ $listing->listingTitle }} <br>  
+    £{{ $listing->listingPrice }} <br>
+    By {{ $listing->listingAuthor }} <br>
+
+    <button>Add to basket</button> <br>
+    <button>Buy now</button>
+
+    <br><br>
+@endforeach
 
 @endsection
