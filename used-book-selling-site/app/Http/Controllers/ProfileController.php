@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Listing;
 
 class ProfileController extends Controller
 {
     public function show($name = null) {
 
-        $name = $name ?? auth()->user()->name;
+        if (auth()->check()) {
+            $name = $name ?? auth()->user()->name;
 
-        return view('profile');
+            $user = auth()->user();
+            $listings = Listing::where('userID', $user->id)->get();
+
+            return view('profile', ['user' => $user, 'listings' => $listings]);
+        } else {
+            return redirect()->route('login');
+        }
     }
 }
