@@ -2,50 +2,66 @@
 
 @section('content')
 
-<h1>Edit listing</h1>
+<div class="container">
+    <div class="border p-4 mt-5">
+        <h1 class="mb-4 text-center">Edit listing</h1>
 
-<form action="{{ route('listings.update', $listing) }}" method="post">
-    @csrf
-    @method('PUT')
+        <div class="d-flex align-items-center justify-content-center">
+            <form action="{{ route('listings.update', $listing) }}" method="post" class="card p-4 mt-3">
+                @csrf
+                @method('PUT')
 
-    <label for="listingTitle">Title:</label>
-    <input type="text" name="listingTitle" value="{{ $listing->listingTitle }}" required>
-    <br>
+                <div class="mb-3">
+                    <label for="listingTitle" class="form-label">Title:</label>
+                    <input type="text" name="listingTitle" class="form-control" value="{{ $listing->listingTitle }}" required>
+                </div>
 
-    <label for="listingAuthor">Author:</label>
-    <input type="text" name="listingAuthor" value="{{ $listing->listingAuthor }}" required>
-    <br>
+                <div class="mb-3">
+                    <label for="listingAuthor" class="form-label">Author:</label>
+                    <input type="text" name="listingAuthor" class="form-control" value="{{ $listing->listingAuthor }}" required>
+                </div>
 
-    <label for="listingDescription">Description:</label>
-    <textarea name="listingDescription">{{ $listing->listingDescription}}</textarea>
-    <br>
+                <div class="mb-3">
+                    <label for="listingDescription" class="form-label">Description:</label>
+                    <textarea name="listingDescription" class="form-control">{{ $listing->listingDescription}}</textarea> 
+                </div>
 
-    <label for="ISBN">ISBN:</label>
-    <input type="text" name="ISBN" value="{{ $listing->ISBN }}" required>
-    <br>
+                <div class="mb-3">
+                    <label for="ISBN" class="form-label">ISBN:</label>
+                    <input type="text" name="ISBN" class="form-control" value="{{ $listing->ISBN }}" required>
+                </div>
 
-    <label for="listingCondition">Condition:</label>
-    <select name="listingCondition" id="" value="{{ $listing->listingCondition }}" required>
-        <option value="">Select one</option>
-        <option value="excellent">Excellent</option>
-        <option value="good">Good</option>
-        <option value="fair">Fair</option>
-        <option value="poor">Poor</option>
-    </select>
-    <br>
+                <div class="mb-3">
+                    <label for="listingCondition" class="form-label">Condition:</label>
+                    <select name="listingCondition" id="listingCondition" class="form-control" required>
+                        <option value="">Select one</option>
+                        <option value="excellent" {{ $listing->listingCondition === 'excellent' ? 'selected' : '' }}>Excellent</option>
+                        <option value="good" {{ $listing->listingCondition === 'good' ? 'selected' : '' }}>Good</option>
+                        <option value="fair" {{ $listing->listingCondition === 'fair' ? 'selected' : '' }}>Fair</option>
+                        <option value="poor" {{ $listing->listingCondition === 'poor' ? 'selected' : '' }}>Poor</option>
+                    </select>
+                </div>
 
-    <label for="listingPrice">Price:</label>
-    <input type="number" name="listingPrice" step="0.01" min="0" value="{{ $listing->listingPrice }}" required>
-    <br>
+                <div class="mb-3">
+                    <label for="listingPrice" class="form-label">Price:</label>
+                    <input type="number" name="listingPrice" class="form-control" step="0.01" min="0" value="{{ $listing->listingPrice }}" required> 
+                </div>
 
-    <label for="listingImage">Image URL:</label>
-    <input type="file" name="listingImage">
-    <p>Current image:</p>
-    <img src="{{ asset($listing->listingImage) }}" alt="image" width="250" height="300">
-    <br>
+                <div class="mb-3">
+                <label for="listingImage" class="form-label">Image URL:</label>
+                    <input type="file" name="listingImage" class="form-control">
+                    <p>Current image:</p>
+                    <img src="{{ asset($listing->listingImage) }}" alt="image" width="250" height="300"> 
+                </div>
 
-    <button type="submit">Update</button>
-</form>
-
+                <div class="d-flex align-items-center justify-content-center mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @endsection
