@@ -13,6 +13,19 @@ class ListingController extends Controller
 
     public function add(Request $request) {
 
+        $request->validate([
+            'listingTitle' => 'required|string',
+            'listingAuthor' => 'required|string',
+            'listingDescription' => 'required|string',
+            'ISBN' => 'required|numeric',
+            'listingCondition' => 'required|string',
+            'listingPrice' => 'required|numeric',
+            'listingImage' => 'required|image',
+        ], [
+            'ISBN.required' => 'The ISBN field is required.',
+            'ISBN.numeric' => 'The ISBN must be a number'
+        ]);
+
         $listing = new Listing();
 
         $listing->listingTitle = request('listingTitle');
