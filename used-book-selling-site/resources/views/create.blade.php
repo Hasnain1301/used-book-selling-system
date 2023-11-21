@@ -13,7 +13,7 @@
         @csrf
 
         <div class="mb-3">
-            <label for="ISBN">ISBN:</label>
+            <label for="ISBN" class="form-label">ISBN:</label>
             <input type="text" name="ISBN" id="ISBN" placeholder="Enter ISBN" class="form-control @error('ISBN') is-invalid @enderror" value="{{ old('ISBN') }}">
             <button type="button" onclick="getBookInfo()">Get Book Info</button>
 
@@ -27,7 +27,7 @@
        
 
         <div class="mb-3">
-            <label for="listingTitle">Title:</label>
+            <label for="listingTitle" class="form-label">Title:</label>
             <input type="text" name="listingTitle" id="listingTitle" class="form-control @error('listingTitle') is-invalid @enderror" placeholder="Enter listing title" value="{{ old('listingTitle') }}">
 
             @error('listingTitle')
@@ -39,7 +39,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="listingAuthor">Author:</label>
+            <label for="listingAuthor" class="form-label">Author:</label>
             <input type="text" name="listingAuthor" id="listingAuthor" class="form-control @error('listingAuthor') is-invalid @enderror" placeholder="Enter listing author">
 
             @error('listingAuthor')
@@ -51,7 +51,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="listingDescription">Description:</label>
+            <label for="listingDescription" class="form-label">Description:</label>
             <textarea name="listingDescription" class="form-control @error('listingDescription') is-invalid @enderror" placeholder="Enter listing description">{{ old('listingDescription') }}</textarea>
 
             @error('listingDescription')
@@ -63,7 +63,7 @@
         </div>
         
         <div class="mb-3">
-            <label for="listingCondition">Condition:</label>
+            <label for="listingCondition" class="form-label">Condition:</label>
             <select name="listingCondition" id="listingCondition" class="form-select @error('listingCondition') is-invalid @enderror">
                 <option value="">Select one</option>
                 <option value="excellent" {{ old('listingCondition') == 'excellent' ? 'selected' : '' }}>Excellent</option>
@@ -81,7 +81,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="listingPrice">Price:</label>
+            <label for="listingPrice" class="form-label">Price:</label>
             <input type="number" name="listingPrice" step="0.01" min="0" class="form-control @error('listingPrice') is-invalid @enderror" placeholder="Enter listing price" value="{{ old('listingPrice') }}">
 
             @error('listingPrice')
@@ -93,7 +93,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="listingImage">Image:</label>
+            <label for="listingImage" class="form-label">Image:</label>
             <input type="file" name="listingImage" class="form-control @error('listingImage') is-invalid @enderror">
 
             @error('listingImage')
