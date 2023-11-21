@@ -1,6 +1,11 @@
 function getBookInfo() {
     var isbn = $("#ISBN").val();
 
+    if(!isbn) {
+        alert('Please enter an ISBN number');
+        return;
+    }
+
     $.ajax({
         url: "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn,
         dataType: "json",
