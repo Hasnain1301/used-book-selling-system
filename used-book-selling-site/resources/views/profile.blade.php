@@ -23,6 +23,12 @@
 <p>Name: {{ auth()->user()->name }}</p>
 <p>Email: {{ auth()->user()->email }}</p>
 
+<h2>Create a New Listing</h2>
+<form action="{{ route('listings.create', ['name' => auth()->user()->name]) }}" method="get">
+    @csrf
+    <button type="submit">Create Listing</button>
+</form>
+
 <h2>Your Listings</h2>
 
 @if ($listings->isEmpty())
@@ -44,12 +50,5 @@
 
     @endforeach
 @endif
-
-<h2>Create a New Listing</h2>
-<form action="{{ route('listings.create', ['name' => auth()->user()->name]) }}" method="get">
-    @csrf
-    <button type="submit">Create Listing</button>
-</form>
-
 
 @endsection
