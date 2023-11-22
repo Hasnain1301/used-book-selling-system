@@ -60,6 +60,19 @@ class ListingController extends Controller
 
     public function update($listingID, Request $request) {
 
+        $request->validate([
+            'listingTitle' => 'required|string',
+            'listingAuthor' => 'required|string',
+            'listingDescription' => 'required|string',
+            'ISBN' => 'required|numeric',
+            'listingCondition' => 'required|string',
+            'listingPrice' => 'required|numeric',
+            'listingImage' => $request->hasFile('listingImage') ? 'required|image' : '',
+        ], [
+            'ISBN.required' => 'The ISBN field is required.',
+            'ISBN.numeric' => 'The ISBN must be a number'
+        ]);
+
         $editListing = Listing::FindOrFail($listingID);
 
         $editListing->listingTitle = request('listingTitle');
