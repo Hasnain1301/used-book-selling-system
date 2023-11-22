@@ -62,7 +62,6 @@
                 <div class="mb-3">
                     <label for="listingCondition" class="form-label">Condition:</label>
                     <select name="listingCondition" id="listingCondition" class="form-control @error('listingCondition') is-invalid @enderror">
-                        <option value="">Select one</option>
                         <option value="excellent" {{ $listing->listingCondition === 'excellent' ? 'selected' : '' }}>Excellent</option>
                         <option value="good" {{ $listing->listingCondition === 'good' ? 'selected' : '' }}>Good</option>
                         <option value="fair" {{ $listing->listingCondition === 'fair' ? 'selected' : '' }}>Fair</option>
