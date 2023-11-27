@@ -36,7 +36,13 @@
     £{{ $listing->listingPrice }} <br>
     By {{ $listing->listingAuthor }} <br>
 
-    <button>Add to basket</button> <br>
+    <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
+        @csrf
+        <button type="submit">Add to Basket</button>
+    </form>
+
+    <br>
+    
     <button>Buy now</button>
 
     <br><br>

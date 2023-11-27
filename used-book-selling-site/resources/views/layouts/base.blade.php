@@ -22,6 +22,7 @@
             <div class="d-flex justify-content-end align-items-center">
                 @auth
                     <a class="nav-link text-white" href="">{{ auth()->user()->name }}</a>
+                    <a class="nav-link text-white" href="{{ route('basket') }}">Basket</a>
                     <a class="nav-link text-white" href="{{ route('profile', ['name' => auth()->user()->name]) }}">My Profile</a>
 
                     <form action="{{ route('logout') }}" method="post">

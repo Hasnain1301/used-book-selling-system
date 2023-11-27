@@ -3,6 +3,7 @@
 use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\RegisterController;
+use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
@@ -39,3 +40,6 @@ Route::post('/profile/{name}/listings/create', [ListingController::class, 'add']
 Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
+
+Route::get('/basket', [BasketController::class, 'show'])->name('basket');
+Route::post('/basket/add/{listingId}', [BasketController::class, 'addToBasket'])->name('basket.add');
