@@ -36,4 +36,12 @@ class BasketController extends Controller
 
         return redirect()->back()->with('success', 'Listing added to your basket');
     }
+
+    public function removeFromBasket($listingId) {
+        $basketItem = Basket::where('user_id', auth()->id())->where('listing_id', $listingId)->first();
+
+        $basketItem->delete();
+        
+        return redirect()->back()->with('success', 'Listing removed from your basket');
+    }
 }

@@ -13,6 +13,7 @@
                         <th>Image</th>
                         <th>Author</th>
                         <th>Price</th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,13 @@
                             <td><img src="{{ $basketItem->listingImage }}" alt=""></td>
                             <td>{{ $basketItem->listingAuthor }}</td>
                             <td>£{{ $basketItem->listingPrice }}</td>
+                            <td>
+                                <form action="{{ route('basket.remove', ['listingId' => $basketItem->listing_id]) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -30,7 +38,7 @@
             <div>
                 <h4>Total: £{{ $totalPrice }}</h4>
             </div>
-            
+
         @else
             <p>Your basket is empty</p>
         @endif

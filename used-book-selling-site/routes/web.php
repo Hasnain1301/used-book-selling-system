@@ -43,3 +43,4 @@ Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('l
 
 Route::get('/basket', [BasketController::class, 'show'])->name('basket');
 Route::post('/basket/add/{listingId}', [BasketController::class, 'addToBasket'])->name('basket.add');
+Route::delete('/basket/remove/{listingId}', [BasketController::class, 'removeFromBasket'])->name('basket.remove');
