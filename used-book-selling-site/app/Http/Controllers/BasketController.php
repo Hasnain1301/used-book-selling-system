@@ -20,7 +20,7 @@ class BasketController extends Controller
             $basketItem->listingImage = $listing->listingImage;
             $basketItem->listingPrice = $listing->listingPrice;
 
-            $totalPrice += $listing->listingPrice * $basketItem->quantity;
+            $totalPrice += $listing->listingPrice;
         }
         
         return view('basket', ['basketItems' => $basketItems, 'totalPrice' => $totalPrice]);
@@ -28,11 +28,17 @@ class BasketController extends Controller
 
     public function addToBasket($listingId) {
 
-        Basket::create([
-            'user_id' => auth()->id(),
-            'listing_id' => $listingId,
-            'quantity' => 1,
-        ]);
+        $existingBasketItem = Basket::where('user_id', auth()->id())->where('listing_id', $listingId)->exists();
+
+        if($existingBasketItem) {
+            return redirect()->back()->with('success', 'Listing is already in your basket');
+        } else {
+            Basket::create([
+                'user_id' => auth()->id(),
+                'listing_id' => $listingId,
+                'quantity' => 1,
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Listing added to your basket');
     }
