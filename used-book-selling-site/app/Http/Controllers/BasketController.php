@@ -32,7 +32,11 @@ class BasketController extends Controller
         $existingBasketItem = Basket::where('user_id', auth()->id())->where('listing_id', $listingId)->exists();
 
         if($existingBasketItem) {
-            return redirect()->back()->with('success', 'Listing is already in your basket');
+            if($request->has('buyNow')){
+                return redirect()->route('basket');
+            } else {
+                return redirect()->back()->with('success', 'Listing is already in your basket');
+            }   
         } else {
             Basket::create([
                 'user_id' => auth()->id(),
