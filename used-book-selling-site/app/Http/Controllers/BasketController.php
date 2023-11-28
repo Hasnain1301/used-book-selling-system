@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Basket;
 use App\Models\Listing;
+use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
@@ -22,11 +23,11 @@ class BasketController extends Controller
 
             $totalPrice += $listing->listingPrice;
         }
-        
+
         return view('basket', ['basketItems' => $basketItems, 'totalPrice' => $totalPrice]);
     }
 
-    public function addToBasket($listingId) {
+    public function addToBasket(Request $request, $listingId) {
 
         $existingBasketItem = Basket::where('user_id', auth()->id())->where('listing_id', $listingId)->exists();
 
@@ -40,7 +41,11 @@ class BasketController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Listing added to your basket');
+        if($request->has('buyNow')) {
+            return redirect()->route('basket');
+        } else {
+            return redirect()->back()->with('success', 'Listing added to your basket');
+        }
     }
 
     public function removeFromBasket($listingId) {

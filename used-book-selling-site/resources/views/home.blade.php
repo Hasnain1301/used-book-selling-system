@@ -39,11 +39,11 @@
     <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
         @csrf
         <button type="submit">Add to Basket</button>
-    </form>
+        
+        <br><br>
 
-    <br>
-    
-    <button>Buy now</button>
+        <button type="submit" name="buyNow">Buy now</button>
+    </form>
 
     <br><br>
 @endforeach
