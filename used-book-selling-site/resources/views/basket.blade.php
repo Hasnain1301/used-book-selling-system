@@ -7,36 +7,50 @@
 
         @if (count($basketItems) > 0)
         <table class="table">
-                <thead>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($basketItems as $basketItem)
                     <tr>
-                        <th>Title</th>
-                        <th>Image</th>
-                        <th>Author</th>
-                        <th>Price</th>
-                        <th>Remove</th>
+                        <td>{{ $basketItem->listingTitle }}</td>
+                        <td><img src="{{ $basketItem->listingImage }}" alt=""></td>
+                        <td>{{ $basketItem->listingAuthor }}</td>
+                        <td>£{{ $basketItem->listingPrice }}</td>
+                        <td>
+                            <form action="{{ route('basket.remove', ['listingId' => $basketItem->listing_id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($basketItems as $basketItem)
-                        <tr>
-                            <td>{{ $basketItem->listingTitle }}</td>
-                            <td><img src="{{ $basketItem->listingImage }}" alt=""></td>
-                            <td>{{ $basketItem->listingAuthor }}</td>
-                            <td>£{{ $basketItem->listingPrice }}</td>
-                            <td>
-                                <form action="{{ route('basket.remove', ['listingId' => $basketItem->listing_id]) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                @endforeach
+            </tbody>
+        </table>
 
             <div>
                 <h4>Total: £{{ $totalPrice }}</h4>
+            </div>
+
+            <div>
+                <form action="{{ route('order.address') }}" method="get">
+                    <button>Continue to checkout</button>
+                </form>
+            </div>
+
+            <br><br>
+            <div>
+                <form action="{{ route('basket.checkout') }}" method="post">
+                    @csrf
+                    <button>Checkout now</button>
+                </form>
             </div>
 
         @else
