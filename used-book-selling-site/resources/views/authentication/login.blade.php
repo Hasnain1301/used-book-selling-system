@@ -51,7 +51,7 @@
 
         <div class="d-flex align-items-center justify-content-center mb-3">
             <button type="submit" class="btn btn-primary">
-                Login in 
+                Login
             </button>
         </div>
     </form>
