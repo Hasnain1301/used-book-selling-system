@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Authentication\LoginController;
 use App\Http\Controllers\Authentication\LogoutController;
 use App\Http\Controllers\Authentication\RegisterController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -44,3 +46,14 @@ Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('l
 Route::get('/basket', [BasketController::class, 'show'])->name('basket');
 Route::post('/basket/add/{listingId}', [BasketController::class, 'addToBasket'])->name('basket.add');
 Route::delete('/basket/remove/{listingId}', [BasketController::class, 'removeFromBasket'])->name('basket.remove');
+
+Route::get('/success', [BasketController::class, 'success'])->name('checkout.success');
+Route::post('/checkout', [BasketController::class, 'checkout'])->name('basket.checkout');
+Route::get('/cancel', [BasketController::class, 'cancel'])->name('checkout.cancel');
+
+Route::get('/order-address', [AddressController::class, 'show'])->name('order.address');
+Route::post('/payment-option', [AddressController::class, 'saveAddress'])->name('address.save');
+Route::post('/temp-address', [AddressController::class, 'saveTempAddress'])->name('address.temp');
+Route::post('/set-primary-address', [AddressController::class, 'setPrimaryAddress'])->name('address.setPrimary');
+Route::delete('/address/{address}', [AddressController::class, 'delete'])->name('address.delete');
+Route::post('/use-primary-address', [AddressController::class, 'usePrimaryAddress'])->name('usePrimaryAddress');
