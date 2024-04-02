@@ -45,14 +45,6 @@
                 </form>
             </div>
 
-            <br><br>
-            <div>
-                <form action="{{ route('basket.checkout') }}" method="post">
-                    @csrf
-                    <button>Checkout now</button>
-                </form>
-            </div>
-
         @else
             <p>Your basket is empty</p>
         @endif
