@@ -24,6 +24,7 @@ class AddressController extends Controller
     public function saveAddress(Request $request){
         $validatedData = $request->validate([
             'address' => 'required|string|max:255',
+            'flat_number' => 'nullable|string|max:255',
             'city' => 'required|string|max:255',
             'zip' => 'required|string|max:20',
             'is_primary' => 'nullable|boolean',
