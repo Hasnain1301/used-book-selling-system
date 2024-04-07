@@ -45,7 +45,7 @@ class ListingController extends Controller
         
         $listing->save();
 
-        return redirect()->route('profile', ['name' => auth()->user()->name])->with('added', "Listing added sucessfully");
+        return redirect()->route('manage.listings', ['name' => auth()->user()->name])->with('added', "Listing added sucessfully");
     }
 
     public function delete(Listing $listing) {
@@ -91,6 +91,19 @@ class ListingController extends Controller
         
         $editListing->save();
 
-        return redirect()->route('profile', ['name' => auth()->user()->name]);
+        return redirect()->route('manage.listings', ['name' => auth()->user()->name]);
+    }
+
+    public function manageListings() {
+        if (auth()->check()) {
+            $name = $name ?? auth()->user()->name;
+
+            $user = auth()->user();
+            $listings = Listing::where('userID', $user->id)->get();
+
+            return view('manageListings', ['user' => $user, 'listings' => $listings]);
+        } else {
+            return redirect()->route('login');
+        }
     }
 }

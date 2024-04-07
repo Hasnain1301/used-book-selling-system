@@ -10,11 +10,7 @@ class ProfileController extends Controller
 
         if (auth()->check()) {
             $name = $name ?? auth()->user()->name;
-
-            $user = auth()->user();
-            $listings = Listing::where('userID', $user->id)->get();
-
-            return view('profile', ['user' => $user, 'listings' => $listings]);
+            return view('profile', ['name' => $name]);
         } else {
             return redirect()->route('login');
         }
