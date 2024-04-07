@@ -35,8 +35,6 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile');
-
 Route::get('//listings/create', [ListingController::class, 'create'])->name('listings.create');
 Route::post('/listings/create', [ListingController::class, 'add'])->name('listings.add');
 Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
@@ -59,3 +57,7 @@ Route::post('/temp-address', [AddressController::class, 'saveTempAddress'])->nam
 Route::post('/set-primary-address', [AddressController::class, 'setPrimaryAddress'])->name('address.setPrimary');
 Route::delete('/address/{address}', [AddressController::class, 'delete'])->name('address.delete');
 Route::post('/use-primary-address', [AddressController::class, 'usePrimaryAddress'])->name('usePrimaryAddress');
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+Route::get('profile/order-history', [ProfileController::class, 'showOrderHistory'])->name('profile.orderHistory');
+Route::get('profile/sold-books', [ProfileController::class, 'showSoldBooks'])->name('profile.soldBooks');

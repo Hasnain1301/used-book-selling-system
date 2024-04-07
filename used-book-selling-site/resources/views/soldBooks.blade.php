@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Your profile page</h1>
+    <h1>Your sold books</h1>
 
     <div class="profile-navigation">
         <ul style="list-style: none; padding: 0; display: flex; justify-content: space-evenly;">
@@ -13,16 +13,21 @@
         </ul>
     </div>
 
-
-    <div class="row mb-4">
+    <div class="row">
         <div class="col">
-            <h2>Personal Details</h2>
-            <p>Name: {{ auth()->user()->name }}</p>
-            <p>Email: {{ auth()->user()->email }}</p>
-        </div>
+            <h2>Sold Books</h2>
+            @if($soldBooks->isEmpty())
+                <p>You have not sold any books.</p>
+            @else
+                <ul>
+                    @foreach($soldBooks as $soldBook)
+                        <li>{{ $soldBook->listing_title }} - Sold for £{{ $soldBook->listing_price }} on {{ $soldBook->created_at->toFormattedDateString() }}</li>
+                    @endforeach
+                </ul>
+            @endif
     </div>
-    
 </div>
 
 
 @endsection
+
