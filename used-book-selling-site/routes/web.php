@@ -37,11 +37,13 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/profile/{name}', [ProfileController::class, 'show'])->name('profile');
 
-Route::get('/profile/{name}/listings/create', [ListingController::class, 'create'])->name('listings.create');
-Route::post('/profile/{name}/listings/create', [ListingController::class, 'add'])->name('listings.add');
+Route::get('//listings/create', [ListingController::class, 'create'])->name('listings.create');
+Route::post('/listings/create', [ListingController::class, 'add'])->name('listings.add');
 Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
+
+Route::get('manage/listings', [ListingController::class, 'manageListings'])->name('manage.listings');
 
 Route::get('/basket', [BasketController::class, 'show'])->name('basket');
 Route::post('/basket/add/{listingId}', [BasketController::class, 'addToBasket'])->name('basket.add');
