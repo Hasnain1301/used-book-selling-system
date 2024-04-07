@@ -3,6 +3,20 @@
 @section('content')
 
 <div class="container">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+</div>
+
+<div class="container">
     <h1>Your profile page</h1>
 
     <div class="profile-navigation">
