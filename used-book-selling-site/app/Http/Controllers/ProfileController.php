@@ -59,4 +59,13 @@ class ProfileController extends Controller
     
         return back()->with('error', 'You do not have permission to set this address as primary.');
     }
+    
+    public function showOrderDetails($orderId) {
+        $user = auth()->user();
+        $order = Order::with('soldItems')->where('userId', $user->id)->where('id', $orderId)->firstOrFail();
+    
+        return view('orderDetails', [
+            'order' => $order
+        ]);
+    }    
 }
