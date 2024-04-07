@@ -21,6 +21,30 @@
             <p>Email: {{ auth()->user()->email }}</p>
         </div>
     </div>
+
+    <h2>Saved Addresses</h2>
+    @foreach($addresses as $address)
+    <div class="address" style="display: flex; align-items: center; justify-content: space-between;">
+    <p style="margin: 0; flex-grow: 1;">
+        {{ $address->flat_number }} {{ $address->address }}, {{ $address->city }}, {{ $address->zip }}
+        @if($address->is_primary)
+        - Currently being used as your delivery address.
+        @endif
+    </p>
+    <div>
+        <form method="POST" action="{{ route('addresses.setPrimary', $address) }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-primary">Set as Primary</button>
+        </form>
+        <form method="POST" action="{{ route('addresses.delete', $address) }}" style="display: inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+    <br>
+</div>
+@endforeach
     
 </div>
 

@@ -61,3 +61,6 @@ Route::post('/use-primary-address', [AddressController::class, 'usePrimaryAddres
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 Route::get('profile/order-history', [ProfileController::class, 'showOrderHistory'])->name('profile.orderHistory');
 Route::get('profile/sold-books', [ProfileController::class, 'showSoldBooks'])->name('profile.soldBooks');
+
+Route::delete('/profile/addresses/{address}', [ProfileController::class, 'deleteAddress'])->name('addresses.delete');
+Route::post('/profile/addresses/{address}/set-primary', [ProfileController::class, 'setPrimaryAddress'])->name('addresses.setPrimary');
