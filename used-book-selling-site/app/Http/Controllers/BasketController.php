@@ -104,6 +104,7 @@ class BasketController extends Controller
             'mode' => 'payment',
             'success_url' => route('checkout.success', [], true)."?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => route('checkout.cancel', [], true),
+            'customer_email' => auth()->user()->email,
         ]);
 
         $order = new Order();
