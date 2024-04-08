@@ -14,4 +14,17 @@ class Listing extends Model
     protected $primaryKey = 'listingID';
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'listingTitle',
+        'listingAuthor',
+        'listingPrice',
+        'listingImage',
+        'listingDescription',
+        'listingCategory',
+        'listingCondition',
+        'listingStatus',
+        'ISBN',
+        'userID',
+    ];
 }

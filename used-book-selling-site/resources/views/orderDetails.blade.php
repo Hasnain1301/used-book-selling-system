@@ -6,21 +6,22 @@
 
     <p>Date of order: {{ $order->created_at->toFormattedDateString() }}</p>
 
-    <p>Status of your order:</p>
+    <p>Status of your order: {{ $order->status }}</p>
 
-    <div class="progress">
+    <div class="progress" style="background-color: {{ $order->status == 'Cancelled' ? '#dc3545' : '#e0e0e0' }};">
         <div class="progress-bar" role="progressbar" 
-                style="width: {{ $order->status == 'Delivered' ? '100%' : ($order->status == 'Dispatching' ? '66%' : '33%') }}"
-                aria-valuenow="{{ $order->status == 'Delivered' ? '3' : ($order->status == 'Dispatching' ? '2' : '1') }}" 
-                aria-valuemin="0" 
-                aria-valuemax="3">
+            style="width: {{ $order->status == 'Cancelled' ? '100%' : ($order->status == 'Delivered' ? '100%' : ($order->status == 'Dispatching' ? '66%' : '33%')) }};
+                   background-color: {{ $order->status == 'Cancelled' ? '#dc3545' : '#007bff' }};"
+            aria-valuenow="{{ $order->status == 'Cancelled' ? '0' : ($order->status == 'Delivered' ? '3' : ($order->status == 'Dispatching' ? '2' : '1')) }}"
+            aria-valuemin="0"
+            aria-valuemax="3">
         </div>
     </div>
 
     <div class="status-steps">
-        <span class="{{ $order->status != 'Processing' ? 'active' : '' }}">1. Order Paid For</span>
-        <span class="{{ $order->status == 'Dispatching' || $order->status == 'Delivered' ? 'active' : '' }}">2. Dispatching</span>
-        <span class="{{ $order->status == 'Delivered' ? 'active' : '' }}">3. Delivered</span>
+        <span class="{{ $order->status == 'Cancelled' ? 'text-muted' : ($order->status != 'Processing' ? 'active' : '') }}">1. Order Paid For</span>
+        <span class="{{ $order->status == 'Cancelled' ? 'text-muted' : ($order->status == 'Dispatching' || $order->status == 'Delivered' ? 'active' : '') }}">2. Dispatching</span>
+        <span class="{{ $order->status == 'Cancelled' ? 'text-muted' : ($order->status == 'Delivered' ? 'active' : '') }}">3. Delivered</span>
     </div>
 
     <h2>Items in this order:</h2>
@@ -29,6 +30,19 @@
             <li><img src="{{ $item->listing_image }}" alt="" style="width:250px; height:auto;"> {{ $item->listing_title }} - £{{ $item->listing_price }}</li>
         @endforeach
     </ul>
+
+    @if($order->status !== 'Cancelled')
+        <form action="{{ route('orders.cancel', $order->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <button type="submit" class="btn btn-danger">Cancel Order</button>
+        </form>
+    @else
+        <p>
+            This order has been cancelled.
+            If money was taken out your account we will get this back to you within 5 working days.
+        </p>
+    @endif
 
     <h3><a href="{{ route('profile.orderHistory') }}">Back to all orders</a></h3>
 
@@ -44,7 +58,7 @@
     }
 
     .progress-bar {
-        background-color: #4CAF50; /* Green color */
+        background-color: #4CAF50; 
         height: 100%;
         transition: width 0.4s ease;
     }

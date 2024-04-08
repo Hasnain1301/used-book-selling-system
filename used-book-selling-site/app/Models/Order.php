@@ -21,5 +21,9 @@ class Order extends Model
     public function soldItems() {
         return $this->hasMany(Sold::class, 'orderID');
     }
+
+    public function canBeCancelled() {
+        return $this->status !== 'Delivered';
+    }
     
 }

@@ -59,7 +59,7 @@ class ProfileController extends Controller
     
         return back()->with('error', 'You do not have permission to set this address as primary.');
     }
-    
+
     public function showOrderDetails($orderId) {
         $user = auth()->user();
         $order = Order::with('soldItems')->where('userId', $user->id)->where('id', $orderId)->firstOrFail();
@@ -68,4 +68,39 @@ class ProfileController extends Controller
             'order' => $order
         ]);
     }    
+
+    public function cancel(Order $order){
+        if ($order->canBeCancelled()) {
+            $order->status = 'Cancelled';
+            $order->save();
+
+            return redirect()->back()->with('status', 'Order cancelled successfully.');
+        }
+
+        return redirect()->back()->with('error', 'Order cannot be cancelled.');
+    }
+
+    public function relistItem($soldBookId){
+        $soldItem = Sold::findOrFail($soldBookId);
+
+        if ($soldItem->seller_id != auth()->id()) {
+            return back()->with('error', 'You cannot relist this item.');
+        }
+
+        $listing = new Listing([
+            'userID' => auth()->id(),
+            'listingTitle' => $soldItem->listing_title,
+            'listingAuthor' => $soldItem->listing_author,
+            'listingDescription' => $soldItem->listing_description,
+            'ISBN' => $soldItem->isbn,
+            'listingCondition' => $soldItem->listing_condition,
+            'listingPrice' => $soldItem->listing_price,
+            'listingImage' => $soldItem->listing_image,
+        ]);
+        $listing->save();
+
+        $soldItem->delete();
+
+        return back()->with('success', 'Item relisted successfully.');
+    }
 }

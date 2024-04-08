@@ -14,14 +14,23 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col"> 
             <h2>Sold Books</h2>
             @if($soldBooks->isEmpty())
                 <p>You have not sold any books.</p>
             @else
                 <ul>
                     @foreach($soldBooks as $soldBook)
-                        <li>{{ $soldBook->listing_title }} - Sold for £{{ $soldBook->listing_price }} on {{ $soldBook->created_at->toFormattedDateString() }}</li>
+                        <li>
+                            {{ $soldBook->listing_title }} - Sold for £{{ $soldBook->listing_price }} on {{ $soldBook->created_at->toFormattedDateString() }}
+                            @if($soldBook->order->status === 'Cancelled')
+                                <p>This order has been cancelled.</p>
+                                <form action="{{ route('sold.relist', $soldBook->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Relist book</button>
+                                </form>
+                            @endif
+                        </li>
                     @endforeach
                 </ul>
             @endif
