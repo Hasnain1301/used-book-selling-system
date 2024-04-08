@@ -23,7 +23,7 @@
                     @foreach($orders as $order)
                         <li>
                             Order #{{ $order->id }} - {{ $order->created_at->toFormattedDateString() }} - Status of order: {{ $order->status }}         
-                            <a href="{{ route('profile.orderDetails', $order->id) }}">View Order Details</a>
+                            <a href="{{ route('profile.orderDetails', $order->id) }}">Track orders/View Order Details</a>
                         </li>
                     @endforeach
                 </ul>
