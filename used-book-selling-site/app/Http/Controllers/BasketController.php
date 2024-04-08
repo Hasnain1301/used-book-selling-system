@@ -108,7 +108,7 @@ class BasketController extends Controller
 
         $order = new Order();
         $order->userId = auth()->id();
-        $order->status = 'Processing payment';
+        $order->status = 'Dispatching';
         $order->total_price = $totalPrice;
         $order->session_id = $session->id;
 
