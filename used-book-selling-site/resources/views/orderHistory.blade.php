@@ -23,7 +23,11 @@
                     @foreach($orders as $order)
                         <li>
                             Order #{{ $order->id }} - {{ $order->created_at->toFormattedDateString() }} - Status of order: {{ $order->status }}         
-                            <a href="{{ route('profile.orderDetails', $order->id) }}">Track orders/View Order Details</a>
+                            @if($order->return_status == 'Requested')
+                                <a href="{{ route('profile.orderDetails', $order->id) }}">Track return details</a>
+                            @else
+                                <a href="{{ route('profile.orderDetails', $order->id) }}">Track orders/View Order Details</a>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
@@ -34,10 +38,3 @@
 
 
 @endsection
-
-<!--                         <ul>
-                            @foreach($order->soldItems as $soldItem)
-                                <li>{{ $soldItem->listing_title }} - {{ $soldItem->listing_price }}</li>
-                            @endforeach
-                        </ul> -->
-

@@ -16,6 +16,9 @@ class Order extends Model
         'total_price',
         'status',
         'session_id',
+        'return_status',
+        'return_reason',
+        'seller_message',
     ];
 
     public function soldItems() {
@@ -24,6 +27,12 @@ class Order extends Model
 
     public function canBeCancelled() {
         return $this->status !== 'Delivered';
+    }
+
+    public function requestReturn($reason = null) {
+        $this->return_status = 'Requested';
+        $this->return_reason = $reason;
+        $this->save();
     }
     
 }

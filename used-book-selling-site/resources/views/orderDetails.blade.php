@@ -31,17 +31,26 @@
         @endforeach
     </ul>
 
-    @if($order->status !== 'Cancelled')
+    @if($order->status == 'Delivered')
+        @if($order->return_status == 'Requested')
+            <button class="btn btn-secondary" disabled>Awaiting approval for return</button>
+        @elseif($order->return_status == 'Approved')
+            <p>Return approved. Please send the item to the following address:</p>
+            <p>{{ $order->seller_message }}</p>
+            <p>Your money will be returned to your account within 5 working days of recieving the items.</p>
+        @elseif($order->return_status == 'Denied')
+            <p>Return request denied. Seller's message: {{ $order->seller_message }}</p>
+        @else
+            <a href="{{ route('orders.returnForm', $order->id) }}" class="btn btn-warning">Request Return</a>
+        @endif
+    @elseif($order->status != 'Cancelled')
         <form action="{{ route('orders.cancel', $order->id) }}" method="POST">
             @csrf
             @method('PUT')
             <button type="submit" class="btn btn-danger">Cancel Order</button>
         </form>
     @else
-        <p>
-            This order has been cancelled.
-            If money was taken out your account we will get this back to you within 5 working days.
-        </p>
+        <p>This order has been cancelled. If money was taken out of your account we will get this back to you within 5 working days.</p>
     @endif
 
     <h3><a href="{{ route('profile.orderHistory') }}">Back to all orders</a></h3>

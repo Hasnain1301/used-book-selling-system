@@ -6,6 +6,7 @@ use App\Models\Listing;
 use App\Models\Order;
 use App\Models\Sold;
 use App\Models\UserAddress;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -102,5 +103,80 @@ class ProfileController extends Controller
         $soldItem->delete();
 
         return back()->with('success', 'Item relisted successfully.');
+    }
+
+    public function returnForm($orderId) {
+        $order = Order::with('soldItems')->find($orderId);
+
+        if (!$order || $order->userId !== auth()->id() || $order->status !== 'Delivered') {
+            abort(404);
+        }
+    
+        return view('returnForm', ['order' => $order]);
+    }
+
+    public function requestReturn(Request $request, $orderId) {
+        $order = Order::find($orderId);
+    
+        if ($order && $order->userId === auth()->id() && $order->status === 'Delivered') {
+            $order->requestReturn($request->input('return_reason'));
+    
+            return back()->with('success', 'Return requested successfully.');
+        }
+        return back()->with('error', 'Return request unsuccessful.');
+    }
+
+    public function submitReturnRequest(Request $request, $orderId) {
+        $order = Order::find($orderId);
+    
+        if (!$order || $order->userId !== auth()->id() || $order->status !== 'Delivered') {
+            abort(404); 
+        }
+    
+        $order->return_status = 'Requested';
+        $order->return_reason = $request->input('return_reason');
+        $order->save();
+        
+        return view('returnForm', ['order' => $order])->with('success', 'Return requested successfully.');
+    }
+
+    public function viewReturnRequest($orderId){
+        $order = Order::with('soldItems')->findOrFail($orderId);
+        $primaryAddress = UserAddress::where('user_id', auth()->id())->where('is_primary', true)->first();
+
+        $soldItem = $order->soldItems->first();
+        if($soldItem->seller_id !== auth()->id()) {
+            abort(404);
+        }
+
+        return view('viewReturnRequest', ['order' => $order, 'primaryAddress' => $primaryAddress]);
+    }
+
+    public function acceptReturnRequest($orderId){
+        $order = Order::findOrFail($orderId);
+        $userAddress = UserAddress::where('user_id', $order->userId)->where('is_primary', true)->first();
+
+        if ($userAddress) {
+            $addressString = "Door/Flat no: " . $userAddress->flat_number . ", Address: " . $userAddress->address . ", City: " . $userAddress->city . ", ZIP: " . $userAddress->zip;
+            $order->seller_message = $addressString;
+        }
+        
+        $order->return_status = 'Approved';
+
+        $order->save();
+
+        return back()->with('success', 'Accepted return request.');
+    }
+
+    public function rejectReturnRequest(Request $request, $orderId){
+        $order = Order::findOrFail($orderId);
+
+        $reason = $request->input('rejection_reason'); 
+        $order->seller_message = $reason;
+        $order->return_status = 'Denied';
+
+        $order->save();
+
+        return back()->with('success', 'Rejected return request.');
     }
 }

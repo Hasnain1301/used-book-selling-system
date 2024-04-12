@@ -29,6 +29,8 @@
                                     @csrf
                                     <button type="submit" class="btn btn-primary">Relist book</button>
                                 </form>
+                            @elseif($soldBook->order->return_status !== 'Requested')
+                                <a href="{{ route('orders.viewReturn', $soldBook->orderID) }}" class="btn btn-info">View return request</a>
                             @endif
                         </li>
                     @endforeach

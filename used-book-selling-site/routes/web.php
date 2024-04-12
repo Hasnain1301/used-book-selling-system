@@ -67,4 +67,9 @@ Route::post('/profile/addresses/{address}/set-primary', [ProfileController::clas
 Route::get('/profile/orders/{orderId}', [ProfileController::class, 'showOrderDetails'])->name('profile.orderDetails');
 Route::put('/orders/{order}/cancel', [ProfileController::class, 'cancel'])->name('orders.cancel');
 Route::post('/relist/{soldBookId}', [ProfileController::class, 'relistItem'])->name('sold.relist');
-
+Route::get('/orders/{order}/return', [ProfileController::class, 'returnForm'])->name('orders.returnForm');
+Route::post('/orders/{order}/request-return', [ProfileController::class, 'requestReturn'])->name('orders.requestReturn');
+Route::post('/orders/{order}/submit-return', [ProfileController::class, 'submitReturnRequest'])->name('orders.submitReturn');
+Route::get('/orders/{orderId}/view-return', [ProfileController::class, 'viewReturnRequest'])->name('orders.viewReturn');
+Route::post('/orders/{orderId}/accept-return', [ProfileController::class, 'acceptReturnRequest'])->name('orders.acceptReturn');
+Route::post('/orders/{orderId}/reject-return', [ProfileController::class, 'rejectReturnRequest'])->name('orders.rejectReturn');
