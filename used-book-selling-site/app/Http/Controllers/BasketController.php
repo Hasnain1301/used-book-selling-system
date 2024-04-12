@@ -160,6 +160,7 @@ class BasketController extends Controller
                         $listing->delete();
                     }
                 }
+                Basket::where('user_id', $userId)->delete();
             }); 
             
         } catch(Exception $e) {
