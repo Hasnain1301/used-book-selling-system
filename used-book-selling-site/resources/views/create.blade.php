@@ -95,6 +95,44 @@
                 </div>
 
                 <div class="mb-3">
+                <label for="department" class="form-label">Department:</label>
+                    <select name="department" class="form-select @error('department') is-invalid @enderror" id="department">
+                        <option value="">Select department</option>
+                        <option value="Aston Business School" {{ old('department') == 'Aston Business School' ? 'selected' : '' }}>Aston Business School</option>
+                        <option value="Aston Law School" {{ old('department') == 'Aston Law School' ? 'selected' : '' }}>Aston Law School</option>
+                        <option value="Aston Medical School" {{ old('department') == 'Aston Medical School' ? 'selected' : '' }}>Aston Medical School</option>
+                        <option value="Health and Life Sciences" {{ old('department') == 'Health and Life Sciences' ? 'selected' : '' }}>Health and Life Sciences</option>
+                        <option value="College of Engineering and Physical Sciences" {{ old('department') == 'College of Engineering and Physical Sciences' ? 'selected' : '' }}>College of Engineering and Physical Sciences</option>
+                        <option value="College of Business and Social Sciences" {{ old('department') == 'College of Business and Social Sciences' ? 'selected' : '' }}>College of Business and Social Sciences</option>
+                        <option value="School of Social Sciences and Humanities" {{ old('department') == 'School of Social Sciences and Humanities' ? 'selected' : '' }}>School of Social Sciences and Humanities</option>
+                    </select>         
+
+                    @error('department')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="year" class="form-label">Year:</label>
+                    <select name="year" class="form-select @error('year') is-invalid @enderror" id="year">
+                        <option value="">Select year of study</option>
+                        <option value="first" {{ old('year') == 'first' ? 'selected' : '' }}>First</option>
+                        <option value="second" {{ old('year') == 'second' ? 'selected' : '' }}>Second</option>
+                        <option value="third" {{ old('year') == 'third' ? 'selected' : '' }}>Third</option>
+                        <option value="fourth" {{ old('year') == 'fourth' ? 'selected' : '' }}>Fourth</option>
+                        <option value="final" {{ old('year') == 'final' ? 'selected' : '' }}>Final</option>
+                    </select>
+
+                    @error('year')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="listingImage" class="form-label">Image:</label>
                     <input type="file" name="listingImage" class="form-control @error('listingImage') is-invalid @enderror">
 

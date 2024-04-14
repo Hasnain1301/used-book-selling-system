@@ -26,5 +26,7 @@ class Listing extends Model
         'listingStatus',
         'ISBN',
         'userID',
+        'department',
+        'year'
     ];
 }

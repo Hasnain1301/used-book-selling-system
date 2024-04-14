@@ -97,6 +97,8 @@ class ProfileController extends Controller
             'listingCondition' => $soldItem->listing_condition,
             'listingPrice' => $soldItem->listing_price,
             'listingImage' => $soldItem->listing_image,
+            'department' => $soldItem->department,
+            'year' => $soldItem->year
         ]);
         $listing->save();
 

@@ -25,7 +25,9 @@ class Sold extends Model
         'listing_condition',
         'listing_price',
         'listing_image',
-        'orderID'
+        'orderID',
+        'department',
+        'year'
     ];
 
     public function buyer() {

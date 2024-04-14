@@ -107,6 +107,8 @@ class AddressController extends Controller
                 $basketItem->listingImage = $listing->listingImage;
                 $basketItem->listingPrice = $listing->listingPrice;
                 $totalPrice += $basketItem->quantity * $listing->listingPrice;
+                $basketItem->department = $listing->department;
+                $basketItem->year = $listing->year;
             }
         }
     

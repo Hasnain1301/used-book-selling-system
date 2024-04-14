@@ -28,6 +28,8 @@ class BasketController extends Controller
             $basketItem->listingAuthor = $listing->listingAuthor;
             $basketItem->listingImage = $listing->listingImage;
             $basketItem->listingPrice = $listing->listingPrice;
+            $basketItem->department = $listing->department;
+            $basketItem->year = $listing->year;
 
             $totalPrice += $listing->listingPrice;
         }
@@ -154,6 +156,8 @@ class BasketController extends Controller
                             'listing_condition' => $listing->listingCondition,
                             'listing_price' => $listing->listingPrice,
                             'listing_image' => $listing->listingImage,
+                            'department' => $listing->department,
+                            'year' => $listing->year,
                             'orderID' => $order->id,
                         ]);
 
