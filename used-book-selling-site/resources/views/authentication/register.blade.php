@@ -1,15 +1,17 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endsection
+
 @section('content')
 
-<h1>Register page</h1>
-
-<div class="d-flex align-items-center justify-content-center">
-    <form action="{{ route('register') }}" method="post" class="card p-4 mt-3">
-
-        @csrf
-
-        <div class="form-floating mb-3">
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="login-card">
+        <h2>Register</h2>
+        <form action="{{ route('register') }}" method="post">
+            @csrf
+            <div class="form-floating mb-3">
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Enter your name" value="{{ old('name') }}">
             <label for="name">Name</label>
 
@@ -47,12 +49,14 @@
             <label for="password_confirmation">Re-enter password</label>
         </div>
 
-        <div class="d-flex align-items-center justify-content-center mb-3">
-            <button type="submit" class="btn btn-primary">
-                Register account now
-            </button>
+            <button type="submit" class="btn-login">Register account now</button>
+        </form>
+
+        <div class="signup-link">
+            Already have an account? <a href="{{ route('login') }}">Login</a>
         </div>
-    </form>
+
+    </div>
 </div>
 
 @endsection
