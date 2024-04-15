@@ -9,7 +9,7 @@
 <div class="welcome-header">
     <h1>Welcome to Books4Less</h1>
     <p>Find your next favorite book at a fraction of the cost.</p> <br> <br>
-    <a href="" class="btn-main">Shop Now</a>
+    <a href="{{ route('home') }}" class="btn-main">Shop Now</a>
 </div>
 
 <div class="justify-content-center">
