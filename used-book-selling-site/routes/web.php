@@ -40,6 +40,7 @@ Route::post('/listings/create', [ListingController::class, 'add'])->name('listin
 Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
 Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
 Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
+Route::get('/individual/listings/{listing}', [ListingController::class, 'showListing'])->name('listings.show');
 
 Route::get('manage/listings', [ListingController::class, 'manageListings'])->name('manage.listings');
 

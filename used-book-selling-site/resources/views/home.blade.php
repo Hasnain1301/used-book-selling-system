@@ -31,19 +31,21 @@
 <h1>All books for sale</h1>
 
 @foreach($listings as $listing) 
-    <img src="{{ $listing->listingImage }}" alt="image" width="250" height="300"> <br>
-    {{ $listing->listingTitle }} <br>  
-    £{{ $listing->listingPrice }} <br>
-    By {{ $listing->listingAuthor }} <br>
+    <a href="{{ route('listings.show', $listing->listingID) }}">
+        <img src="{{ $listing->listingImage }}" alt="image" width="250" height="300"> <br>
+        {{ $listing->listingTitle }} <br>  
+        £{{ $listing->listingPrice }} <br>
+        By {{ $listing->listingAuthor }} <br>
 
-    <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
-        @csrf
-        <button type="submit">Add to Basket</button>
-        
-        <br><br>
+        <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
+            @csrf
+            <button type="submit">Add to Basket</button>
+            
+            <br><br>
 
-        <button type="submit" name="buyNow">Buy now</button>
-    </form>
+            <button type="submit" name="buyNow">Buy now</button>
+        </form>
+    </a>
 
     <br><br>
 @endforeach

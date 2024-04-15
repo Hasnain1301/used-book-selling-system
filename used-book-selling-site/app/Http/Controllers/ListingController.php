@@ -11,6 +11,10 @@ class ListingController extends Controller
         return view('create');
     }
 
+    public function showListing(Listing $listing) {
+        return view('individualListing', ['listing' => $listing]);
+    }
+
     public function add(Request $request) {
 
         $request->validate([
