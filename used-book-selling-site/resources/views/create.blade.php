@@ -4,23 +4,27 @@
 <script src="{{ asset('js/findISBN.js') }}"></script>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
+@endsection
+
 @section('content')
 
-<div class="container">
-    <div class="border p-4 mt-5">
-        <h1 class="mb-4 text-center">Create a New Listing</h1>
+<div class="container custom-container">
+    <div class="border p-4 mt-5 custom-border">
+        <h1 class="mb-4 text-center custom-header">Create a New Listing</h1>
 
         <div class="d-flex align-items-center justify-content-center">
             <form action="{{ route('listings.add', ['name' => auth()->user()->name]) }}" enctype="multipart/form-data" method="post" id="listingForm" class="card p-4 mt-3">
                 @csrf
 
-                <div class="mb-3">
-                    <label for="ISBN" class="form-label">ISBN:</label>
-                    <input type="text" name="ISBN" id="ISBN" placeholder="Enter ISBN" class="form-control @error('ISBN') is-invalid @enderror" value="{{ old('ISBN') }}">
-                    <button type="button" onclick="getBookInfo()">Get Book Info</button>
+                <div class="mb-3 custom-form-group">
+                    <label for="ISBN" class="form-label custom-label">ISBN:</label>
+                    <input type="text" name="ISBN" id="ISBN" placeholder="Enter ISBN" class="form-control custom-input @error('ISBN') is-invalid @enderror" value="{{ old('ISBN') }}"> <br>
+                    <button type="button" onclick="getBookInfo()" class="btn custom-button">Get Book Info</button>
 
                     @error('ISBN')
-                        <div class="invalid-feedback">
+                        <div class="custom-invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
@@ -145,7 +149,7 @@
                 </div>
 
                 <div class="d-flex align-items-center justify-content-center mb-3">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn custom-submit-button">
                         Create Listing
                     </button>
                 </div>

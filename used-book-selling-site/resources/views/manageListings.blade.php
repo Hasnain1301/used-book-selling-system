@@ -2,7 +2,9 @@
 
 @section('content')
 
-<h1>Create/Manage listings</h1>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
+@endsection
 
 <div class="justify-content-center">
     @if(session()->has('added'))
@@ -20,32 +22,35 @@
     @endif
 </div>  
 
-<h2>Create a New Listing</h2>
-<form action="{{ route('listings.create', ['name' => auth()->user()->name]) }}" method="get">
+<h2>Add a new listing now by clicking below:</h2>
+<form action="{{ route('listings.create', ['name' => auth()->user()->name]) }}" method="get" class="text-center">
     @csrf
-    <button type="submit">Create Listing</button>
+    <button type="submit" class="btn-custom">Create a new listing now</button>
 </form>
 
-<h2>Your Listings</h2>
+<h2>Your current listings</h2>
 
 @if ($listings->isEmpty())
     <p>You have no listings yet.</p>
 @else
-    @foreach ($listings as $listing)
-        <img src="{{ $listing->listingImage }}" alt="image" width="250" height="300"> <br>
-        {{ $listing->listingTitle }} <br>  
-        £{{ $listing->listingPrice }} <br>
-        By {{ $listing->listingAuthor }} <br>
+    <div class="listings">
+        @foreach ($listings as $listing)
+            <div class="listing-item">
+                <img src="{{ $listing->listingImage }}" alt="Listing Image">
+                <h3>{{ $listing->listingTitle }}</h3>  
+                <p>£{{ $listing->listingPrice }}</p>
+                <p>By {{ $listing->listingAuthor }}</p>
 
-        <button><a href="{{ route('listings.edit', $listing) }}">Edit listing</a></button> <br><br> 
-        
-        <form action="{{ route('listings.delete', $listing) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Delete</button>
-        </form>
-
-    @endforeach
+                <a href="{{ route('listings.edit', $listing) }}" class="btn-custom">Edit listing</a> 
+                
+                <form action="{{ route('listings.delete', $listing) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn-custom">Delete</button>
+                </form>
+            </div>
+        @endforeach
+    </div>
 @endif
 
 @endsection
