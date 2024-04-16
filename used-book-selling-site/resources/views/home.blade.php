@@ -1,8 +1,10 @@
 @extends('layouts.base')
 
-@section('content')
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/listings.css') }}">
+@endsection
 
-<h1>Welcome page</h1>
+@section('content')
 
 <div class="justify-content-center">
     @if(session()->has('success'))
@@ -28,26 +30,32 @@
     @endif
 </div> 
 
-<h1>All books for sale</h1>
+<h1 class="text-center my-4">All books for sale</h1>
 
-@foreach($listings as $listing) 
-    <a href="{{ route('listings.show', $listing->listingID) }}">
-        <img src="{{ $listing->listingImage }}" alt="image" width="250" height="300"> <br>
-        {{ $listing->listingTitle }} <br>  
-        £{{ $listing->listingPrice }} <br>
-        By {{ $listing->listingAuthor }} <br>
-
-        <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
-            @csrf
-            <button type="submit">Add to Basket</button>
-            
-            <br><br>
-
-            <button type="submit" name="buyNow">Buy now</button>
-        </form>
-    </a>
-
-    <br><br>
-@endforeach
+<div class="container">
+    <div class="row">
+        @foreach($listings as $listing) 
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="{{ route('listings.show', $listing->listingID) }}">
+                        <img class="card-img-top" src="{{ $listing->listingImage }}" alt="{{ $listing->listingTitle }}">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ $listing->listingTitle }}</h5>
+                        <p class="card-text">By {{ $listing->listingAuthor }}</p>
+                        <div class="mt-auto">
+                            <p class="card-text price">£{{ $listing->listingPrice }}</p>
+                            <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post" class="d-flex justify-content-between">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Add to Basket</button>
+                                <button type="submit" name="buyNow" class="btn btn-warning">Buy now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
 
 @endsection
