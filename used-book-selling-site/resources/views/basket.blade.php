@@ -1,53 +1,59 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/basket.css') }}">
+@endsection
+
 @section('content')
 
 <div class="container">
-        <h1>Your Basket</h1>
+    <div class="basket">
+        <div class="basket-items">
+            @if (count($basketItems) > 0)
+                @foreach ($basketItems as $basketItem)
+                    <div class="item-card d-flex mb-4">
+                        <img class="item-image" src="{{ $basketItem->listingImage }}" alt="Book image">
+                        <div class="item-details">
+                            <h5 class="item-title">{{ $basketItem->listingTitle }}</h5>
+                            <p class="item-author">{{ $basketItem->listingAuthor }}</p>
+                        </div>
+                        <div class="item-price">£{{ $basketItem->listingPrice }}</div>
+                        <form action="{{ route('basket.remove', ['listingId' => $basketItem->listing_id]) }}" method="post" class="remove-form ml-auto">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="remove-button">&times;</button>
+                        </form>
+                    </div>
+                @endforeach
+            @else
+                <h1>Your basket is empty</h1>
+            @endif
+        </div>
+
 
         @if (count($basketItems) > 0)
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Author</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($basketItems as $basketItem)
-                    <tr>
-                        <td>{{ $basketItem->listingTitle }}</td>
-                        <td><img src="{{ $basketItem->listingImage }}" alt=""></td>
-                        <td>{{ $basketItem->listingAuthor }}</td>
-                        <td>£{{ $basketItem->listingPrice }}</td>
-                        <td>
-                            <form action="{{ route('basket.remove', ['listingId' => $basketItem->listing_id]) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit">Remove</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-            <div>
-                <h4>Total: £{{ $totalPrice }}</h4>
+            <div class="summary-box">
+                <h2>Summary</h2>
+                <div class="summary-content">
+                    <p>Subtotal ({{ count($basketItems) }} Items)</p>
+                    <p>£{{ $totalPrice }}</p>
+                </div>
+                <div class="checkout-btn">
+                    <form action="{{ route('order.address') }}" method="get">
+                        <button>Continue to checkout</button>
+                    </form>
+                </div>
             </div>
-
-            <div>
-                <form action="{{ route('order.address') }}" method="get">
-                    <button>Continue to checkout</button>
-                </form>
-            </div>
-
         @else
-            <p>Your basket is empty</p>
+            <div class="summary-box">
+                <div class="checkout-btn">
+                    <form action="{{ route('home') }}" method="get">
+                        <button>Continue shopping</button>
+                    </form>
+                </div>
+            </div>
         @endif
     </div>
+</div>
 
 @endsection

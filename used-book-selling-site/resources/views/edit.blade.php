@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
+@endsection
+
 @section('content')
 
 <div class="container">
