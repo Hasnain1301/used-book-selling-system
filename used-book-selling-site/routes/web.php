@@ -77,3 +77,4 @@ Route::post('/orders/{order}/submit-return', [ProfileController::class, 'submitR
 Route::get('/orders/{orderId}/view-return', [ProfileController::class, 'viewReturnRequest'])->name('orders.viewReturn');
 Route::post('/orders/{orderId}/accept-return', [ProfileController::class, 'acceptReturnRequest'])->name('orders.acceptReturn');
 Route::post('/orders/{orderId}/reject-return', [ProfileController::class, 'rejectReturnRequest'])->name('orders.rejectReturn');
+Route::post('/complete-order/{soldBookId}', [ProfileController::class, 'completeOrder'])->name('completeOrder');

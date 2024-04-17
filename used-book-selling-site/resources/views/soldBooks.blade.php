@@ -37,6 +37,15 @@
                                 @elseif($soldBook->order->return_status === 'Requested')
                                     <a href="{{ route('orders.viewReturn', $soldBook->orderID) }}" class="btn btn-info">View return request</a>
                                 @endif
+
+                                @if($soldBook->order->status === 'Dispatching')
+                                    <form action="{{ route('completeOrder', $soldBook->id) }}" method="POST" style="margin-bottom: 0;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">Complete Order</button>
+                                    </form>
+                                @elseif($soldBook->order->status === 'Delivered')
+                                    <span class="order-status-delivered">Delivered</span>
+                                @endif
                             </li>
                         @endforeach
                     </ul>

@@ -39,6 +39,20 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function completeOrder($soldBookId) {
+        $soldBook = Sold::with('order')->findOrFail($soldBookId); 
+        $order = $soldBook->order;
+    
+        if ($order->status === 'Dispatching') { 
+            $order->status = 'Delivered';
+            $order->save();
+    
+            return back()->with('status', 'Order marked as delivered!');
+        }
+    
+        return back()->with('error', 'Order is not in Dispatching status.');
+    }
+
     public function deleteAddress(UserAddress $address) {
         if (auth()->id() == $address->user_id) {
             $address->delete();
