@@ -1,0 +1,86 @@
+.custom-container {
+    max-width: 800px;
+    margin: auto;
+    background: #f9f9f9; 
+    margin-bottom: 50px;
+}
+
+.custom-border {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+}
+
+.custom-header {
+    color: #333; 
+}
+
+.custom-card {
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.custom-form-group {
+    margin-bottom: 15px;
+}
+
+.custom-label {
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.custom-input, .custom-select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 1em;
+    padding: 5px 10px;
+}
+
+.custom-input:focus, .custom-select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-button {
+    color: white;
+    background-color: #007bff; 
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 5px; 
+}
+
+.custom-button:hover {
+    background-color: #0056b3; 
+}
+
+.custom-invalid-feedback {
+    color: #dc3545; 
+}
+
+.custom-submit-button {
+    background-color: #28a745; 
+    border-color: #28a745;
+    padding: 10px 20px;
+}
+
+.custom-submit-button:hover {
+    background-color: #218838; 
+}
+
+@media (max-width: 576px) {
+    .custom-header {
+        font-size: 1.5em;
+    }
+    
+    .custom-button, .custom-submit-button {
+        width: 100%; 
+        margin-top: 10px;
+    }
+}

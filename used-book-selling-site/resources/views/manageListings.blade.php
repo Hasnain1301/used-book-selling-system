@@ -31,7 +31,7 @@
 <h2>Your current listings</h2>
 
 @if ($listings->isEmpty())
-    <p>You have no listings yet.</p>
+    <h2>You have no listings yet.</h2>
 @else
     <div class="listings">
         @foreach ($listings as $listing)

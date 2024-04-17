@@ -1,5 +1,9 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -16,50 +20,47 @@
     @endif
 </div>
 
-<div class="container">
-    <h1>Your profile page</h1>
+<div class="container profile-container">
+    <h1 class="profile-title">Your profile page</h1>
 
     <div class="profile-navigation">
-        <ul style="list-style: none; padding: 0; display: flex; justify-content: space-evenly;">
-            <li><a href="{{ route('profile') }}">Personal Details</a></li>
-            <li><a href="{{ route('profile.orderHistory') }}">Order History</a></li>
-            <li><a href="{{ route('profile.soldBooks') }}">Sold Books</a></li>
+        <ul class="profile-nav-list">
+            <li class="profile-nav-item"><a href="{{ route('profile') }}">Personal Details</a></li>
+            <li class="profile-nav-item"><a href="{{ route('profile.orderHistory') }}">Order History</a></li>
+            <li class="profile-nav-item"><a href="{{ route('profile.soldBooks') }}">Sold Books</a></li>
         </ul>
     </div>
 
-
-    <div class="row mb-4">
-        <div class="col">
-            <h2>Personal Details</h2>
-            <p>Name: {{ auth()->user()->name }}</p>
-            <p>Email: {{ auth()->user()->email }}</p>
-        </div>
+    <div class="profile-section personal-details">
+        <h2>Personal Details</h2>
+        <p>Name: {{ auth()->user()->name }}</p>
+        <p>Email: {{ auth()->user()->email }}</p>
     </div>
 
-    <h2>Saved Addresses</h2>
-    @foreach($addresses as $address)
-    <div class="address" style="display: flex; align-items: center; justify-content: space-between;">
-    <p style="margin: 0; flex-grow: 1;">
-        {{ $address->flat_number }} {{ $address->address }}, {{ $address->city }}, {{ $address->zip }}
-        @if($address->is_primary)
-        - Currently being used as your delivery address.
-        @endif
-    </p>
-    <div>
-        <form method="POST" action="{{ route('addresses.setPrimary', $address) }}" style="display: inline;">
-            @csrf
-            <button type="submit" class="btn btn-primary">Set as Primary</button>
-        </form>
-        <form method="POST" action="{{ route('addresses.delete', $address) }}" style="display: inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+    <div class="profile-section saved-addresses">
+        <h2>Saved Addresses</h2>
+        @foreach($addresses as $address)
+            <div class="address">
+                <p>
+                    {{ $address->flat_number }} {{ $address->address }}, {{ $address->city }}, {{ $address->zip }}
+                    @if($address->is_primary)
+                        - Currently being used as your delivery address.
+                    @endif
+                </p>
+                <div class="address-actions">
+                    <form method="POST" action="{{ route('addresses.setPrimary', $address) }}" class="address-form">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Set as Primary</button>
+                    </form>
+                    <form method="POST" action="{{ route('addresses.delete', $address) }}" class="address-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
     </div>
-    <br>
-</div>
-@endforeach
-    
 </div>
 
 
