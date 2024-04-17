@@ -1,37 +1,47 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/checkSuc.css') }}">
+@endsection
+
 @section('content')
 
-<h1>Order confirmation page</h1>
+<div class="container">
 
-@if (isset($order))
-    <p>Thank you for your order!</p>
-    <p>Order Number: B4S - {{ $order->id }}</p>
-    <p>Total Paid: £{{ $order->total_price }}</p>
-    
-    <h3>Items:</h3>
-    <ul>
-        @foreach ($order->soldItems as $soldItem)
-            <li>{{ $soldItem->listing_title }} - £{{ $soldItem->listing_price }}</li>
-        @endforeach
-    </ul>
+    <h1 class="confirmation-heading">Order confirmation page</h1>
 
-    @if(isset($address))
-        <div class="delivery-address">
-            <h3>Order will be shipped to this address:</h3>
-            <p>{{ $address->address }}</p>
-            <p>{{ $address->city }}, {{ $address->zip }}</p>
+    @if (isset($order))
+        <p class="confirmation-message">Thank you for your order!</p>
+        <p class="order-info">Order Number: B4S - {{ $order->id }}</p>
+        <p class="order-info">Total Paid: £{{ $order->total_price }}</p>
+        
+        <h3 class="items-heading">Items:</h3>
+        <ul class="items-list">
+            @foreach ($order->soldItems as $soldItem)
+                <li>{{ $soldItem->listing_title }} - £{{ $soldItem->listing_price }}</li>
+            @endforeach
+        </ul>
+
+        @if(isset($address))
+            <div class="delivery-address">
+                <h3 class="address-heading">Order will be shipped to this address:</h3>
+                <p class="address-info">{{ $address->address }}</p>
+                <p class="address-info">{{ $address->city }}, {{ $address->zip }}</p>
+            </div>
+            <div class="delivery-estimate">
+                <p class="estimate-message">You will receive your order in 2-3 working days.</p>
+            </div>
+        @endif
+
+        <div class="order-status-link">
+            <a href="{{ route('profile.orderHistory') }}">
+                <button class="view-status">View status of order</button>
+            </a>
         </div>
-        <div class="delivery-estimate">
-            <p>You will receive your order in 2-3 working days.</p>
-        </div>
+    @else
+        <p class="error-message">Order information could not be found.</p>
     @endif
 
-    
-@else
-    <p>Order information could not be found.</p>
-@endif
-
-
+</div>
 
 @endsection

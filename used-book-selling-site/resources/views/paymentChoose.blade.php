@@ -1,40 +1,43 @@
 @extends('layouts.base')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
+@endsection
+
 @section('content')
 
-<div>
-    <p><strong>Buyer:</strong> {{ $user->name }}</p>
-    @if($tempAddress)
-        <p><strong>Delivery Address:</strong> {{ $tempAddress->address }}, {{ $tempAddress->city }}, {{ $tempAddress->zip }}</p>
-    @elseif($primaryAddress)
-        <p><strong>Delivery Address:</strong> {{ $primaryAddress->address }}, {{ $primaryAddress->city }}, {{ $primaryAddress->zip }}</p>
+<div class="user-info">
+    <p class="user-detail"><strong>Buyer:</strong> {{ $user->name }}</p>
+    @if($primaryAddress)
+        <p class="address-detail"><strong>Delivery Address:</strong> {{ $primaryAddress->flat_number }} {{ $primaryAddress->address }}, {{ $primaryAddress->city }}, {{ $primaryAddress->zip }}</p>
+    @elseif($tempAddress)
+        <p class="address-detail"><strong>Delivery Address:</strong> {{ $tempAddress->flat_number }} {{ $tempAddress->address }}, {{ $tempAddress->city }}, {{ $tempAddress->zip }}</p>
     @else
-        <p>No delivery address set.</p>
+        <p class="no-address">No delivery address set.</p>
     @endif
 </div>
 
 @if($basketItems->isNotEmpty())
-    <div>
+    <div class="basket-details">
         <h4>Item(s) you are purchasing:</h4>
         @foreach($basketItems as $item)
-            <div>
+            <div class="item">
                 <p><strong>Title:</strong> {{ $item->listingTitle }}</p>
                 <p><strong>Author:</strong> {{ $item->listingAuthor }}</p>
                 <p><strong>Price:</strong> £{{ $item->listingPrice }}</p>
             </div>
         @endforeach
-        <p><strong>Total price to pay:</strong> £{{ $totalPrice }}</p>
+        <p class="total-price"><strong>Total price to pay:</strong> £{{ $totalPrice }}</p>
     </div>
 @else
-    <p>There is nothing to purchase.</p>
+    <p class="empty-basket">There is nothing to purchase.</p>
 @endif
 
-<h4>Payment options:</h4>
 
-<div>
+<div class="payment-form">
     <form action="{{ route('basket.checkout') }}" method="post">
         @csrf
-        <button>Pay by card</button>
+        <button type="submit" class="pay-button">Pay now</button>
     </form>
 </div>
 

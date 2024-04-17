@@ -1,0 +1,54 @@
+.user-info, 
+.basket-details, 
+.payment-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 1rem;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    text-align: center;
+    max-width: auto;
+}
+
+.user-detail, 
+.address-detail, 
+.no-address, 
+.item p, 
+.total-price, 
+.empty-basket {
+    margin: 10px 0;
+}
+
+h4 {
+    color: #5a5a5a;
+}
+
+.item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.pay-button {
+    background-color: #0084ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.pay-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .user-info, .basket-details, .payment-form {
+        padding: 10px;
+    }
+}
