@@ -75,3 +75,113 @@
     background-color: #c82333;
     border-color: #bd2130;
 }
+
+.order-link {
+    text-decoration: none;
+    color: #005a9c;
+    font-weight: bold;
+}
+
+.order-link:hover {
+    text-decoration: underline;
+}
+
+.order-history {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    color: #005a9c;
+    margin-bottom: 20px;
+}
+
+.no-orders {
+    color: #666;
+    font-style: italic;
+}
+
+.order-list {
+    list-style: none;
+    padding: 0;
+}
+
+.order-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.order-info {
+    font-weight: bold;
+}
+
+.order-status {
+    color: #333;
+    margin-left: 10px;
+}
+
+.order-link {
+    color: #005a9c;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.order-link:hover {
+    text-decoration: underline;
+}
+
+.sold-books {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    color: #005a9c;
+    margin-bottom: 20px;
+}
+
+.no-sold-books {
+    color: #666;
+    font-style: italic;
+}
+
+.sold-books-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sold-book-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.book-info {
+    font-weight: bold;
+}
+
+.order-cancelled {
+    color: #dc3545;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.btn-primary,
+.btn-info {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 0.375rem 0.75rem;
+    color: #fff;
+}
+
+.btn-primary:hover,
+.btn-info:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
