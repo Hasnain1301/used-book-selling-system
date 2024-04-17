@@ -1,0 +1,36 @@
+.container {
+    max-width: 900px; 
+}
+
+.card {
+    background-color: #f8f9fa; 
+    border-color: #004080; 
+}
+
+.progress-bar {
+    background-color: #4CAF50; 
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.status-steps span {
+    text-align: center;
+    font-weight: normal;
+    color: #aaa;
+}
+
+.status-steps span.text-primary {
+    color: #004080;
+}
+
+.status-steps span.text-muted {
+    color: #6c757d; 
+}
+
+h1, h2, h3 {
+    color: #004080; 
+}
+
+a.text-dark:hover {
+    color: #0056b3; 
+}

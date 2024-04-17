@@ -1,0 +1,54 @@
+.order-title {
+    color: #004080; 
+}
+
+.order-detail {
+    font-size: 1rem;
+    color: #333; 
+}
+
+.reason-text {
+    font-weight: bold;
+}
+
+.order-items-title {
+    margin-top: 20px;
+    color: #004080; 
+}
+
+.order-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-item {
+    margin-bottom: 10px;
+    align-items: center; 
+    display: flex;
+}
+
+.order-item-image {
+    width: 250px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.order-item-title {
+    font-weight: bold;
+}
+
+.order-item-price {
+    font-style: italic;
+}
+
+.alert {
+    margin-top: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.btn-success, .btn-danger {
+    margin-right: 10px;
+}

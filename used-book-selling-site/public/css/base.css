@@ -2,11 +2,6 @@ html, body {
     height: 100%;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 .navbar {
     background-color: #050f1f; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -39,17 +34,7 @@ body {
     background-color: #0056b3; 
 }
 
-@media (max-width: 991px) {
-    .navbar-expand-lg .navbar-nav .nav-link {
-        padding-right: .5rem;
-        padding-left: .5rem;
-    }
-    
-    .navbar-expand-lg .navbar-nav {
-        flex-direction: row;
-        justify-content: flex-start; 
-    }
-}
+
 
 footer {
     background-color: #2C3E50; 
