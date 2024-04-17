@@ -30,15 +30,31 @@
     @endif
 </div> 
 
-<h1 class="text-center my-4">All books for sale</h1>
+<h2 class="text-center my-4">All books for sale</h2>
+
+<div class="container mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="{{ route('home') }}" method="GET" class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Search for books..." value="{{ request('search') }}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    @if(request('search'))
+                        <a href="{{ route('home') }}" class="btn btn-outline-danger">Clear</a>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
-        @foreach($listings as $listing) 
+        @forelse($listings as $listing) 
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <a href="{{ route('listings.show', $listing->listingID) }}">
-                        <img class="card-img-top" src="{{ $listing->listingImage }}" alt="{{ $listing->listingTitle }}">
+                        <img class="card-img-top" src="{{ asset($listing->listingImage) }}" alt="{{ $listing->listingTitle }}">
                     </a>
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $listing->listingTitle }}</h5>
@@ -54,7 +70,11 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col">
+                <h5>No listings found.</h5>
+            </div>
+        @endforelse
     </div>
 </div>
 

@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index() {
-
-        $lisitings = Listing::all();
-
-        return view('home', ['listings' => $lisitings]);
-    }
+    public function index(Request $request) {
+        $query = Listing::query();
+    
+        if ($search = $request->input('search')) {
+            $query->where('listingTitle', 'like', "%{$search}%")
+                  ->orWhere('listingAuthor', 'like', "%{$search}%")
+                  ->orWhere('listingDescription', 'like', "%{$search}%")
+                  ->orWhere('ISBN', 'like', "%{$search}%");
+        }
+    
+        $listings = $query->get();
+    
+        return view('home', ['listings' => $listings]);
+    }    
 }
