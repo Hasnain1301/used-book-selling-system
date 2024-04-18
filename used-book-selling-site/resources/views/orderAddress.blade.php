@@ -13,19 +13,31 @@
         @csrf
         <div class="form-group">
             <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required maxlength="255">
+            <input type="text" id="address" name="address" class="@error('address') is-invalid @enderror" required maxlength="255" value="{{ old('address') }}">
+            @error('address')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="flat_number">Flat Number/House No:</label>
-            <input type="text" id="flat_number" name="flat_number" maxlength="255">
+            <input type="text" id="flat_number" name="flat_number" class="@error('flat_number') is-invalid @enderror" maxlength="255" value="{{ old('flat_number') }}">
+            @error('flat_number')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="city">Town/City:</label>
-            <input type="text" id="city" name="city" required maxlength="255">
+            <input type="text" id="city" name="city" class="@error('city') is-invalid @enderror" required maxlength="255" value="{{ old('city') }}">
+            @error('city')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
-            <label for="zip">Postcode/ZIP</label>
-            <input type="text" id="zip" name="zip" required maxlength="20">
+            <label for="zip">Postcode/ZIP:</label>
+            <input type="text" id="zip" name="zip" class="@error('zip') is-invalid @enderror" required maxlength="20" value="{{ old('zip') }}">
+            @error('zip')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="is_primary" class="checkbox-label">Save as primary address:</label>

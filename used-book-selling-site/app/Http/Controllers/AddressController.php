@@ -26,7 +26,7 @@ class AddressController extends Controller
             'address' => 'required|string|max:255',
             'flat_number' => 'nullable|string|max:255',
             'city' => 'required|string|max:255',
-            'zip' => 'required|string|max:20',
+            'zip' => 'required|string|max:20|regex:/^[A-Z0-9 -]+$/i', 
             'is_primary' => 'nullable|boolean',
         ]);
 
