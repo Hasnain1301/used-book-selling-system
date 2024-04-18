@@ -119,7 +119,7 @@
                 </div>
                 @empty
                 <div class="col">
-                    <h5>No listings found.</h5>
+                    <h5>No listings available yet.</h5>
                 </div>
                 @endforelse
             </div>

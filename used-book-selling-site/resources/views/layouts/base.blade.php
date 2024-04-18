@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/base.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     @yield('css')
 
@@ -23,23 +24,23 @@
             </div>
             <div class="d-flex justify-content-end align-items-center">
                 @auth
-                    <a class="nav-link text-white" href="">{{ auth()->user()->name }}</a>
                     <a class="nav-link text-white" href="{{ route('manage.listings') }}">Create/Manage Listings</a>
-                    <a class="nav-link text-white" href="{{ route('basket') }}">Basket</a>
+                    <a class="nav-link text-white" href="{{ route('basket') }}">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        <span class="badge bg-secondary">{{ app('App\Http\Controllers\BasketController')->getBasketCount() }}</span>
+                    </a>
                     <a class="nav-link text-white" href="{{ route('profile', ['name' => auth()->user()->name]) }}">My Profile</a>
 
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">Logout</button>
                     </form>
-                    
                 @endauth
 
                 @guest
                     <a class="nav-link text-white" href="{{ route('register') }}">Register</a>
                     <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
                 @endguest
-                
             </div>
         </div>
     </nav>

@@ -177,4 +177,13 @@ class BasketController extends Controller
     public function cancel() {
         return redirect()->back()->with('error', 'Payment cancelled');
     }
+
+    public function getBasketCount() {
+        $basketItems = Basket::where('user_id', auth()->id())->get();
+        $count = 0;
+        foreach ($basketItems as $item) {
+            $count += $item->quantity; 
+        }
+        return $count;
+    }
 }
