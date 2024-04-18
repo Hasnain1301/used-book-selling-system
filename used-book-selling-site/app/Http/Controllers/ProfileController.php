@@ -17,7 +17,12 @@ class ProfileController extends Controller
             $user = auth()->user(); 
             $addresses = $user->addresses;  
 
-            return view('profile', ['name' => $name, 'addresses' => $addresses]);
+            $notificationsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+                $query->where('seller_id', $user->id);
+            })->where('status', 'Cancelled')->count();
+    
+
+            return view('profile', ['name' => $name, 'addresses' => $addresses, 'notificationsCount' => $notificationsCount]);
         } else {
             return redirect()->route('login');
         }
@@ -26,16 +31,28 @@ class ProfileController extends Controller
     public function showOrderHistory() {
         $user = auth()->user();
         $orders = Order::where('userId', $user->id)->get();
+
+        $notificationsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('seller_id', $user->id);
+        })->where('status', 'Cancelled')->count();
+
         return view('orderHistory', [
-            'orders' => $orders
+            'orders' => $orders,
+            'notificationsCount' => $notificationsCount
         ]);
     }
 
     public function showSoldBooks() {
         $user = auth()->user();
         $soldBooks = Sold::where('seller_id', $user->id)->get();
+
+        $notificationsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('seller_id', $user->id);
+        })->where('status', 'Cancelled')->count();
+
         return view('soldBooks', [
-            'soldBooks' => $soldBooks
+            'soldBooks' => $soldBooks,
+            'notificationsCount' => $notificationsCount
         ]);
     }
 

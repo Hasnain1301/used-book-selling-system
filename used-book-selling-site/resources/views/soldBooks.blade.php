@@ -13,7 +13,14 @@
         <ul class="profile-nav-list">
             <li class="profile-nav-item"><a href="{{ route('profile') }}">Personal Details</a></li>
             <li class="profile-nav-item"><a href="{{ route('profile.orderHistory') }}">Order History</a></li>
-            <li class="profile-nav-item"><a href="{{ route('profile.soldBooks') }}">Sold Books</a></li>
+            <li class="profile-nav-item">
+                <a href="{{ route('profile.soldBooks') }}">
+                    Sold Books
+                    @if ($notificationsCount > 0)
+                        <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">{{ $notificationsCount }}</span>
+                    @endif
+                </a>
+            </li>
         </ul>
     </div>
 
