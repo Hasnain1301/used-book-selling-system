@@ -25,10 +25,16 @@
         <p>Department: {{ $listing->department }}</p>
         <p>Year: {{ $listing->year }}</p>
 
-        <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
-            @csrf
-            <button type="submit" name="buyNow" class="btn-custom">Buy Now</button>
-        </form>
+        @auth
+            <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
+                @csrf
+                <button type="submit" name="buyNow" class="btn-custom">Buy Now</button>
+            </form>
+        @endauth
+
+        @guest
+            <a href="{{ route('login') }}" class="btn-custom" style="text-decoration: none;">Login to buy now</a>
+        @endguest
     </div>
 </div>
 

@@ -100,11 +100,19 @@
                                 <p class="card-text">By {{ $listing->listingAuthor }}</p>
                                 <div class="mt-auto">
                                     <p class="card-text price">£{{ $listing->listingPrice }}</p>
-                                    <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post" class="d-flex justify-content-between">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary">Add to Basket</button>
-                                        <button type="submit" name="buyNow" class="btn btn-warning">Buy now</button>
-                                    </form>
+                                    @auth
+                                        <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post" class="d-flex justify-content-between">
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary">Add to Basket</button>
+                                            <button type="submit" name="buyNow" class="btn btn-warning">Buy now</button>
+                                        </form>
+                                    @endauth
+
+                                    @guest
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{ route('login') }}" class="btn btn-primary">Login to purchase now</a>
+                                        </div>
+                                    @endguest
                                 </div>
                             </div>
                         </div>

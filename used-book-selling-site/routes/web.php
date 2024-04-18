@@ -38,13 +38,14 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
+Route::get('/individual/listings/{listing}', [ListingController::class, 'showListing'])->name('listings.show');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/listings/create', [ListingController::class, 'create'])->name('listings.create');
     Route::post('/listings/create', [ListingController::class, 'add'])->name('listings.add');
     Route::delete('/listings/{listing}/delete', [ListingController::class, 'delete'])->name('listings.delete');
     Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listings.edit');
     Route::put('/listings/{listing}', [ListingController::class, 'update'])->name('listings.update');
-    Route::get('/individual/listings/{listing}', [ListingController::class, 'showListing'])->name('listings.show');
 
     Route::get('manage/listings', [ListingController::class, 'manageListings'])->name('manage.listings');
 
