@@ -23,20 +23,29 @@
 <div class="container profile-container">
     <h1 class="profile-title">Your profile page</h1>
 
-    <div class="profile-navigation">
-        <ul class="profile-nav-list">
+    <ul class="profile-nav-list">
             <li class="profile-nav-item"><a href="{{ route('profile') }}">Personal Details</a></li>
-            <li class="profile-nav-item"><a href="{{ route('profile.orderHistory') }}">Order History</a></li>
+            <li class="profile-nav-item"><a href="{{ route('profile.orderHistory') }}">Order History
+            @if ($respondedReturnsCount > 0)
+                <span class="notification-badge" style="background-color: green; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">
+                    {{ $respondedReturnsCount }}
+                </span>
+            @endif
+            </a></li>
             <li class="profile-nav-item">
                 <a href="{{ route('profile.soldBooks') }}">
                     Sold Books
                     @if ($notificationsCount > 0)
                         <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">{{ $notificationsCount }}</span>
                     @endif
+                    @if ($requestedReturnsCount > 0)
+                        <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">
+                            {{ $requestedReturnsCount }}
+                        </span>
+                    @endif
                 </a>
             </li>
         </ul>
-    </div>
 
     <div class="profile-section personal-details">
         <h2>Personal Details</h2>

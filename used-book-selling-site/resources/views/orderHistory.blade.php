@@ -25,6 +25,11 @@
                     @if ($notificationsCount > 0)
                         <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">{{ $notificationsCount }}</span>
                     @endif
+                    @if ($requestedReturnsCount > 0)
+                        <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">
+                            {{ $requestedReturnsCount }}
+                        </span>
+                    @endif
                 </a>
             </li>
         </ul>
@@ -42,7 +47,7 @@
                             <li class="order-item">
                                 <span class="order-info">Order #{{ $order->id }} - {{ $order->created_at->toFormattedDateString() }}</span>
                                 <span class="order-status">Status: {{ $order->status }}</span>
-                                @if($order->return_status == 'Requested')
+                                @if($order->return_status == 'Requested' || $order->return_status == 'Approved' || $order->return_status == 'Denied')
                                     <a href="{{ route('profile.orderDetails', $order->id) }}" class="order-link">Track return details</a>
                                 @else
                                     <a href="{{ route('profile.orderDetails', $order->id) }}" class="order-link">Track orders/View Details</a>

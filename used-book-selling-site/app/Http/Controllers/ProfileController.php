@@ -20,9 +20,18 @@ class ProfileController extends Controller
             $notificationsCount = Order::whereHas('soldItems', function ($query) use ($user) {
                 $query->where('seller_id', $user->id);
             })->where('status', 'Cancelled')->count();
+
+            
+        $respondedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('userId', $user->id);
+        })->whereIn('return_status', ['Approved', 'Denied'])->count();
+
+        $requestedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('seller_id', $user->id);
+        })->where('return_status', 'Requested')->count();
     
 
-            return view('profile', ['name' => $name, 'addresses' => $addresses, 'notificationsCount' => $notificationsCount]);
+            return view('profile', ['name' => $name, 'addresses' => $addresses, 'notificationsCount' => $notificationsCount, 'respondedReturnsCount' => $respondedReturnsCount, 'requestedReturnsCount' => $requestedReturnsCount]);
         } else {
             return redirect()->route('login');
         }
@@ -40,10 +49,15 @@ class ProfileController extends Controller
             $query->where('userId', $user->id);
         })->whereIn('return_status', ['Approved', 'Denied'])->count();
 
+        $requestedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('seller_id', $user->id);
+        })->where('return_status', 'Requested')->count();
+
         return view('orderHistory', [
             'orders' => $orders,
             'notificationsCount' => $notificationsCount,
-            'respondedReturnsCount' => $respondedReturnsCount
+            'respondedReturnsCount' => $respondedReturnsCount,
+            'requestedReturnsCount' => $requestedReturnsCount
         ]);
     }
 
@@ -59,11 +73,16 @@ class ProfileController extends Controller
             $query->where('seller_id', $user->id);
         })->where('return_status', 'Requested')->count();
 
+        $respondedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('userId', $user->id);
+        })->whereIn('return_status', ['Approved', 'Denied'])->count();
+
 
         return view('soldBooks', [
             'soldBooks' => $soldBooks,
             'notificationsCount' => $notificationsCount,
-            'requestedReturnsCount' => $requestedReturnsCount
+            'requestedReturnsCount' => $requestedReturnsCount,
+            'respondedReturnsCount' => $respondedReturnsCount
         ]);
     }
 
