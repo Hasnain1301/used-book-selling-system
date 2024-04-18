@@ -19,6 +19,11 @@
                     @if ($notificationsCount > 0)
                         <span class="notification-badge" style="background-color: red; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">{{ $notificationsCount }}</span>
                     @endif
+                    @if ($requestedReturnsCount > 0)
+                        <span class="notification-badge" style="background-color: blue; color: white; border-radius: 50%; padding: 0.25em 0.5em; font-size: 0.75em; line-height: 1; vertical-align: super; margin-left: 5px;">
+                            {{ $requestedReturnsCount }}
+                        </span>
+                    @endif
                 </a>
             </li>
         </ul>

@@ -36,9 +36,14 @@ class ProfileController extends Controller
             $query->where('seller_id', $user->id);
         })->where('status', 'Cancelled')->count();
 
+        $respondedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('userId', $user->id);
+        })->whereIn('return_status', ['Approved', 'Denied'])->count();
+
         return view('orderHistory', [
             'orders' => $orders,
-            'notificationsCount' => $notificationsCount
+            'notificationsCount' => $notificationsCount,
+            'respondedReturnsCount' => $respondedReturnsCount
         ]);
     }
 
@@ -49,10 +54,16 @@ class ProfileController extends Controller
         $notificationsCount = Order::whereHas('soldItems', function ($query) use ($user) {
             $query->where('seller_id', $user->id);
         })->where('status', 'Cancelled')->count();
+        
+        $requestedReturnsCount = Order::whereHas('soldItems', function ($query) use ($user) {
+            $query->where('seller_id', $user->id);
+        })->where('return_status', 'Requested')->count();
+
 
         return view('soldBooks', [
             'soldBooks' => $soldBooks,
-            'notificationsCount' => $notificationsCount
+            'notificationsCount' => $notificationsCount,
+            'requestedReturnsCount' => $requestedReturnsCount
         ]);
     }
 
