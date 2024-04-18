@@ -55,11 +55,16 @@
             </div>
             <div class="col-md-4 mb-3">
                 <h5 class="text-uppercase mb-3">Quick links</h5>
-                <ul class="list">
-                    <li><a href="#" class="text-white">Web page</a></li>
-                    <li><a href="#" class="text-white">Web page</a></li>
-                    <li><a href="#" class="text-white">Web page</a></li>
-                </ul>
+                @auth
+                    <a class="text-white" href="{{ route('home') }}">Home</a><br><br>
+                    <a class="text-white" href="{{ route('profile.orderHistory') }}">My Orders</a><br><br>
+                    <a class="text-white" href="{{ route('profile', ['name' => auth()->user()->name]) }}">My Profile</a>
+                @endauth
+                @guest
+                    <a class="text-white" href="{{ route('home') }}">Home</a><br><br>
+                    <a class="text-white" href="{{ route('login') }}">Login</a><br><br>
+                    <a class="text-white" href="{{ route('register') }}">Sign Up</a>
+                @endguest
             </div>
             <div class="col-md-4 mb-3">
                 <h5 class="text-uppercase mb-3">Subscribe to recieve promo codes and more</h5>
