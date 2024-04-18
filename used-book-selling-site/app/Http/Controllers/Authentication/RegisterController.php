@@ -19,7 +19,16 @@ class RegisterController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'password' => [
+                'required',
+                'confirmed',
+                'min:8', // minimum 8 characters
+                'regex:/[A-Z]/', // at least one uppercase letter
+                'regex:/[@$!%*#?&-_]/', // at least one special character
+            ],[
+                'password.min' => 'The password must be at least 8 characters long.',
+                'password.regex' => 'The password must contain at least one uppercase letter and one special character.',
+            ]
         ]);
 
         //create account and add to database
