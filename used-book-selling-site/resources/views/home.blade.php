@@ -101,11 +101,15 @@
                                 <div class="mt-auto">
                                     <p class="card-text price">£{{ $listing->listingPrice }}</p>
                                     @auth
+                                    @if(auth()->id() != $listing->userID)
                                         <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post" class="d-flex justify-content-between">
                                             @csrf
                                             <button type="submit" class="btn btn-primary">Add to Basket</button>
-                                            <button type="submit" name="buyNow" class="btn btn-warning">Buy now</button>
+                                            <button type="submit" name="buyNow" class="btn btn-warning">Buy Now</button>
                                         </form>
+                                    @else
+                                        <button class="btn btn-secondary disabled">This is your listing</button>
+                                    @endif
                                     @endauth
 
                                     @guest

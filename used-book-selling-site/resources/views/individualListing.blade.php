@@ -21,15 +21,20 @@
         <p>Price: £{{ $listing->listingPrice }}</p>
         <p>ISBN: {{ $listing->ISBN }}</p>
         <p>Condition: {{ $listing->listingCondition }}</p>
-        <p>Category: {{ $listing->listingCategory }}</p>
         <p>Department: {{ $listing->department }}</p>
         <p>Year: {{ $listing->year }}</p>
 
         @auth
-            <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
-                @csrf
-                <button type="submit" name="buyNow" class="btn-custom">Buy Now</button>
-            </form>
+
+            @if(auth()->id() != $listing->userID)
+                <form action="{{ route('basket.add', ['listingId' => $listing->listingID]) }}" method="post">
+                    @csrf
+                    <button type="submit" name="buyNow" class="btn-custom">Buy Now</button>
+                </form>
+            @else
+                <button class="btn btn-secondary disabled">This is your listing</button>
+            @endif
+
         @endauth
 
         @guest
