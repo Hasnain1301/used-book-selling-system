@@ -8,7 +8,10 @@
 
 <div class="welcome-header">
     <h1>Welcome to Books4Less</h1>
-    <p>Find your next favorite book at a fraction of the cost.</p> <br> <br>
+    <p>Find academic books at a fraction of the cost.</p> <br> <br>
+
+    <img src="{{ asset('images/logo.jpg') }}" alt="Books4Less Logo" style="display: block; margin: 0 auto; width: 500px; height: auto;"> <br><br>
+
     <a href="{{ route('home') }}" class="btn-main">Shop Now</a>
 </div>
 

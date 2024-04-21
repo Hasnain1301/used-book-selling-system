@@ -78,15 +78,15 @@
         </div>
 
         <div class="col-md-9">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search for books..." value="{{ request('search') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
-                    @if(request('search'))
-                        <a href="{{ route('home') }}" class="btn btn-outline-danger">Clear</a>
-                    @endif
-                </div>
+        <form action="{{ route('home') }}" method="get" class="input-group mb-3">
+            <input type="text" class="form-control" name="search" placeholder="Search for books..." value="{{ request('search') }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                @if(request('search'))
+                    <a href="{{ route('home') }}" class="btn btn-outline-danger">Clear</a>
+                @endif
             </div>
+        </form>
 
             <div class="row">
                 @forelse($listings as $listing)

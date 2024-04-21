@@ -19,7 +19,6 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        //sign user in after correct details are entered
         if(!auth()->attempt(['email' => $request->email, 'password' => $request->password,])) {
             return back()->with('incorrect', 'Incorrect email or password');
         }   
